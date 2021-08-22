@@ -3,6 +3,7 @@
   "version": "0.0.5",
   "description": "",
   "private": false,
+  "repository": "https://github.com/sdta25196/stat-line",
   "bin": {
     "line": "src/index.js"
   },

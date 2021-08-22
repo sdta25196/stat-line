@@ -1,0 +1,21 @@
+{
+  "name": "stat-line",
+  "version": "0.0.5",
+  "description": "",
+  "private": false,
+  "bin": {
+    "line": "src/index.js"
+  },
+  "keywords": [
+    "line",
+    "stat",
+    "statistics",
+    "stat lines"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "yargs-parser": "^20.2.9"
+  }
+}

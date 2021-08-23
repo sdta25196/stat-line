@@ -13,7 +13,7 @@ function statLines(workPath, fileType, fileStat = {}) {
         const extname = path.extname(file)
         if (extname === fileType) {
           let data = fs.readFileSync(path.resolve(`${workPath}/${file}`), 'utf8')
-          fileLine = data.split('\r\n').length
+          fileLine = data.split('\n').length
           fileStat[path.resolve(`${workPath}/${file}`)] = fileLine
         }
       }

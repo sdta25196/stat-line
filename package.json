@@ -1,6 +1,6 @@
 {
   "name": "stat-line",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "description": "",
   "private": false,
   "repository": "https://github.com/sdta25196/stat-line",
@@ -14,9 +14,10 @@
     "stat lines"
   ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "chalk": "^4.1.2",
+    "progress": "^2.0.3",
     "yargs-parser": "^20.2.9"
   }
 }

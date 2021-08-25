@@ -1,19 +1,20 @@
 # A line of code statistics tool and can assign file type
 
 [中文文档](https://github.com/sdta25196/stat-line/blob/master/readme_CN.md)
-### install
+
+### Installation
 
 ```js
   npm i stat-line -g
 ```
 
-### use
+### Usage
 
 ```js
-  line path [--type]
+  line [path] [--type]
 ```
 
-### e.g
+### Examples
 ```js
   // current path default statistics .js file
   line   

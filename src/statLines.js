@@ -1,10 +1,13 @@
 
 const path = require('path')
 const fs = require('fs')
+const ProgressBar = require('progress')
+const chalk = require('chalk')
 
 function statLines(workPath, fileType, fileStat = {}) {
   try {
     const files = fs.readdirSync(workPath)
+    var bar = new ProgressBar(`:bar :current / :total`, { total: files.length, clear: true });
     files.forEach(file => {
       const stat = fs.lstatSync(path.resolve(`${workPath}/${file}`));
       if (stat.isDirectory()) {
@@ -17,9 +20,12 @@ function statLines(workPath, fileType, fileStat = {}) {
           fileStat[path.resolve(`${workPath}/${file}`)] = fileLine
         }
       }
+      bar.tick();
     })
   } catch (error) {
-    console.warn("读取文件夹错误！")
+    console.log(
+      chalk.red("读取文件夹错误！")
+    )
   }
 }
 

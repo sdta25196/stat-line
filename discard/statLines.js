@@ -4,7 +4,7 @@ const fs = require('fs')
 const ProgressBar = require('progress')
 const chalk = require('chalk')
 
-function statLines(workPath, fileType, fileStat = {}) {
+function statLines(workPath, fileType, fileStat = { }) {
   try {
     const files = fs.readdirSync(workPath)
     var bar = new ProgressBar(`:bar :current / :total`, { total: files.length, clear: true });

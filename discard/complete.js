@@ -1,6 +1,6 @@
 const chalk = require('chalk')
 
-function complete(fileStat) {
+function complete(fileStat, fileType) {
   const keys = Object.keys(fileStat)
   if (keys.length) {
     console.log(fileStat)

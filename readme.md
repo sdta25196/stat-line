@@ -18,18 +18,24 @@ A line of code statistics tool and can assign file type
 
 ## Examples
 
-* current path default statistics .js file
+* All `JS` files in the current path are counted by default
 ```js
   line   
 ```
   
-* statistics current path .scss file
+* statistics current path `scss` file
 ```js
   // Methods a
-  line --type .scss
+  line --type scss
 
   // Methods b
-  line ./ --type .scss 
+  line ./ --type scss 
+```
+
+* custom path
+```js
+  // [./src] Change to your custom relative path
+  line ./src
 ```
 
 * Display help information
@@ -41,3 +47,5 @@ A line of code statistics tool and can assign file type
 
 - [ ] Whether recursive folders are required 
 - [ ] use typescript rewrite
+- [ ] Specify folders that do not need statistics
+- [ ] Multiple file types can be specified

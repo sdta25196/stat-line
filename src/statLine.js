@@ -2,6 +2,7 @@ const path = require('path')
 const fs = require('fs')
 const ProgressBar = require('progress')
 const chalk = require('chalk')
+const { log } = require('./utils')
 
 class StatLine {
   fileType
@@ -26,7 +27,7 @@ class StatLine {
 
   statLines(workPath) {
     const files = fs.readdirSync(workPath)
-    var bar = new ProgressBar(`:bar :current / :total`, { total: files.length, clear: true });
+    const bar = new ProgressBar(`:bar :current / :total`, { total: files.length, clear: true });
     files.forEach(file => {
       const filePath = path.resolve(`${workPath}/${file}`)
       if (fs.lstatSync(filePath).isDirectory()) {
@@ -40,8 +41,8 @@ class StatLine {
 
   updateFileStat(filePath) {
     if (path.extname(filePath) === this.fileType) {
-      let data = fs.readFileSync(filePath, 'utf8')
-      this.fileStat[filePath] = data.split('\n').length
+      let content = fs.readFileSync(filePath, 'utf8')
+      this.fileStat[filePath] = content.split('\n').length
     }
   }
 
@@ -50,17 +51,12 @@ class StatLine {
     if (keys.length) {
       let sum = 0
       keys.forEach(e => sum += this.fileStat[e])
-      this.log(this.fileStat)
-      this.log(`总计${keys.length}个文件,${sum}行`)
+      log(this.fileStat)
+      log(`总计${keys.length}个文件,${sum}行`)
     } else {
-      this.log(chalk.red(`未统计到${this.fileType}类型文件`))
+      log(chalk.red(`未统计到${this.fileType}类型文件`))
     }
   }
-
-  log(msg) {
-    console.log(msg)
-  }
-
 }
 
 module.exports = StatLine

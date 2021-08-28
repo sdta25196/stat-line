@@ -1,30 +1,43 @@
-# A line of code statistics tool and can assign file type
+# stat-line
+
+A line of code statistics tool and can assign file type
 
 [中文文档](https://github.com/sdta25196/stat-line/blob/master/readme_CN.md)
 
-### Installation
+## Installation
 
 ```js
   npm i stat-line -g
 ```
 
-### Usage
+## Usage
 
 ```js
   line [path] [--type]
 ```
 
-### Examples
+## Examples
+
+* current path default statistics .js file
 ```js
-  // current path default statistics .js file
   line   
 ```
-  or 
+  
+* statistics current path .scss file
 ```js
-  // statistics current path .scss file
+  // Methods a
+  line --type .scss
+
+  // Methods b
   line ./ --type .scss 
 ```
-  
-### todoList：
 
-- [ ] Whether recursive folders are required
+* Display help information
+```js
+  line --help 
+```
+  
+## todoList：
+
+- [ ] Whether recursive folders are required 
+- [ ] use typescript rewrite

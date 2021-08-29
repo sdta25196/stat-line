@@ -23,13 +23,19 @@
   line   
 ```
 
-* 指定统计当前路径下所有的`scss`文件
+* 指定统计当前路径下所有的`scss`文件行数
 ```js
   // 方式一
-  line --type scss
+  line -t scss
 
   // 方式二
-  line ./ --type scss 
+  line ./ -t scss 
+```
+
+* 指定统计当前路径下所有的`scss`、`css`、`js`文件行数
+```js
+  // 方式一
+  line -t scss css js
 ```
 
 * custom 自定义路径
@@ -39,12 +45,10 @@
 ```
 * 显示帮助信息
 ```js
-  line --help
+  line -h
 ```
 
 ## 清单：
 
 - [ ] 是否需要递归文件夹
-- [ ] 使用typescript重写
 - [ ] 指定不需要扫描的文件夹
-- [ ] 可指定多个文件类型

@@ -8,7 +8,14 @@ var yargs_parser_1 = __importDefault(require("yargs-parser"));
 var statLine_1 = __importDefault(require("./statLine"));
 var chalk_1 = __importDefault(require("chalk"));
 var utils_1 = require("./utils");
-var argv = yargs_parser_1["default"](process.argv);
+var argv = yargs_parser_1["default"](process.argv, {
+    alias: { 'type': ['t'], 'help': ['h'] },
+    "default": { 'type': '.js' },
+    array: ['type'],
+    configuration: {
+        'greedy-arrays': true
+    }
+});
 var userPath = argv._[2] || './';
 if (argv.help) {
     var content = require('fs').readFileSync(require('path').resolve(__dirname, '../static/help.txt'), 'utf-8');

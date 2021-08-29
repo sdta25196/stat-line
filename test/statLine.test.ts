@@ -1,19 +1,23 @@
-const StatLine = require('../es/statLine').default
-// const StatLine = require('../src/statLine')
+import StatLine from '../es/statLine'
+// import StatLine from '../src/statLine'
 
-test('测试统计工具-js', () => {
-  const sl = new StatLine(__dirname)
+test('测试统计', () => {
+  const sl = new StatLine(__dirname, ['js'])
   expect(sl.run()).toBeUndefined()
 });
-test('测试统计工具-css', () => {
-  const sl = new StatLine(__dirname, 'css')
+test('测试指定文件类型统计', () => {
+  const sl = new StatLine(__dirname, ['css'])
   expect(sl.run()).toBeUndefined()
 });
-test('测试统计工具-指定文件统计', () => {
-  const sl = new StatLine(__dirname + '/a.js')
+test('测试指定文件统计', () => {
+  const sl = new StatLine(__dirname + '/a.js', ['.js'])
   expect(sl.run()).toBeUndefined()
 });
-test('测试统计工具-没有类型', () => {
-  const sl = new StatLine(__dirname, 'null')
+test('测试不存在的文件类型统计', () => {
+  const sl = new StatLine(__dirname, ['dart'])
+  expect(sl.run()).toBeUndefined()
+});
+test('测试多文件类型统计', () => {
+  const sl = new StatLine(__dirname, ['css', 'js'])
   expect(sl.run()).toBeUndefined()
 });

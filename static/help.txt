@@ -2,13 +2,15 @@
 
 Usage: line [path] [Options]
 
-path              If you want to use [path]. You need to use relative path.
-                  default [path] is [./] 
+path                If you want to use [path]. You need to use relative path.
+                    default [path] is [./] 
+                    e.g line ./src
 
 Options:
 
-  --type          assign the type of file to be counted
-                  e.g  line --type scss
+  -t, --type        specify the type of file to be counted, multiple types can be specified
+                    e.g  line --type scss
+                    e.g  line --type scss css js   // will count scss、css、js file
 
-  --help          Display help information
-                  e.g  line --help
+  -h, --help        Display help information
+                    e.g  line --help

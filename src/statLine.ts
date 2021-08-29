@@ -5,20 +5,26 @@ import chalk from 'chalk'
 import { log } from './utils'
 
 class StatLine {
-  fileType: string
+  fileType: string[]
   workPath: string
-  fileStat: Record<string, number> = { }
-  constructor(userPath: string, fileType: string = '.js') {
-    if (!fileType.startsWith(".")) {
-      fileType = `.${fileType}`
-    }
-    this.fileType = fileType
+  fileStatInfo: Record<string, number> = { }
+  constructor(userPath: string, fileType: string[]) {
+    this.fileType = this.addDot(fileType)
     this.workPath = path.resolve(process.cwd(), userPath)
   }
 
   run(): void {
     this.branchCondition(this.workPath)
     this.complete()
+  }
+
+  addDot(fileType: string[]): string[] {
+    fileType.forEach((item, i, arr) => {
+      if (!item.startsWith(".")) {
+        arr[i] = `.${item}`
+      }
+    })
+    return fileType
   }
 
   statLines(workPath: string): void {
@@ -31,28 +37,47 @@ class StatLine {
     })
   }
 
+  /** 分支条件处理 */
   branchCondition(filePath: string) {
     if (fs.lstatSync(filePath).isDirectory()) {
       this.statLines(filePath)
     } else {
-      this.updateFileStat(filePath)
+      this.updateFileStatInfo(filePath)
     }
   }
 
-  updateFileStat(filePath: string): void {
-    if (path.extname(filePath) === this.fileType) {
-      let content = fs.readFileSync(filePath, 'utf8')
-      this.fileStat[filePath] = content.split('\n').length
-    }
+  updateFileStatInfo(filePath: string): void {
+    this.fileType.forEach(item => {
+      if (path.extname(filePath) === item) {
+        let content = fs.readFileSync(filePath, 'utf8')
+        this.fileStatInfo[filePath] = content.split('\n').length
+      }
+    })
   }
 
   complete(): void {
-    const keys = Object.keys(this.fileStat)
+    const keys = Object.keys(this.fileStatInfo)
     if (keys.length) {
-      let sum = 0
-      keys.forEach(e => sum += this.fileStat[e])
-      log(JSON.stringify(this.fileStat, null, 4))
-      log(`总计${keys.length}个文件,${sum}行`)
+      const allStat: Record<string, number> = { }
+      const sumStat: Record<string, number> = { }
+      for (let k in this.fileStatInfo) {
+        this.fileType.forEach(item => {
+          if (new RegExp(`${item}$`).test(k)) {
+            if (!allStat[item] || !sumStat[item]) {
+              allStat[item] = 0
+              sumStat[item] = 0
+            }
+            // stat line 统计行
+            allStat[item] += this.fileStatInfo[k]
+            // stat sum 统计文件数
+            sumStat[item]++
+          }
+        })
+      }
+      log(JSON.stringify(this.fileStatInfo, null, 4))
+      for (let k in allStat) {
+        log(`${k}类型文件,总计${sumStat[k]}个,共${allStat[k]}行`)
+      }
     } else {
       log(chalk.red(`未统计到${this.fileType}类型文件`))
     }

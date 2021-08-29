@@ -23,13 +23,17 @@ A line of code statistics tool and can specify file type
   line   
 ```
   
-* statistics current path `scss` file
+* count current path `scss` file lines
 ```js
   // Methods a
-  line --type scss
+  line -t scss
 
   // Methods b
-  line ./ --type scss 
+  line ./ -t scss 
+```
+* count current path `scss` `css` `js` file lines
+```js
+  line -t scss css js
 ```
 
 * custom path
@@ -40,12 +44,10 @@ A line of code statistics tool and can specify file type
 
 * Display help information
 ```js
-  line --help 
+  line -h
 ```
   
 ## todoList：
 
 - [ ] Whether recursive folders are required 
-- [ ] use typescript rewrite
 - [ ] Specify folders that do not need statistics
-- [ ] Multiple file types can be specified

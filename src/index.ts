@@ -5,7 +5,14 @@ import StatLine from './statLine'
 import chalk from 'chalk'
 import { log } from './utils'
 
-const argv = parse(process.argv)
+const argv = parse(process.argv, {
+  alias: { 'type': ['t'], 'help': ['h'] },
+  default: { 'type': '.js' },
+  array: ['type'],
+  configuration: {
+    'greedy-arrays': true
+  }
+})
 
 const userPath: string = argv._[2] || './'
 

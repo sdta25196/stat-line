@@ -1,6 +1,6 @@
 {
   "name": "stat-line",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "",
   "private": false,
   "repository": "https://github.com/sdta25196/stat-line",
@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "tsc && npm publish"
+    "upload": "tsc && npm publish"
   },
   "keywords": [
     "line",

@@ -8,9 +8,10 @@ path                If you want to use [path]. You need to use relative path.
 
 Options:
 
-  -t, --type        specify the type of file to be counted, multiple types can be specified
+  -t, --type        specify the type of file to be counted.
                     e.g  line --type scss
-                    e.g  line --type scss css js   // will count scss、css、js file
+                    multiple types can be specified
+                    e.g  line --type scss css js
 
   -h, --help        Display help information
                     e.g  line --help

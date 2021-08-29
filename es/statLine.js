@@ -80,11 +80,11 @@ var StatLine = /** @class */ (function () {
             }
             utils_1.log(JSON.stringify(this.fileStatInfo, null, 4));
             for (var k in allStat_1) {
-                utils_1.log(k + "\u7C7B\u578B\u6587\u4EF6,\u603B\u8BA1" + sumStat_1[k] + "\u4E2A,\u5171" + allStat_1[k] + "\u884C");
+                utils_1.log("There are " + sumStat_1[k] + " " + k + " files, " + allStat_1[k] + " lines in total");
             }
         }
         else {
-            utils_1.log(chalk_1["default"].red("\u672A\u7EDF\u8BA1\u5230" + this.fileType + "\u7C7B\u578B\u6587\u4EF6"));
+            utils_1.log(chalk_1["default"].red(this.fileType + " file not found"));
         }
     };
     return StatLine;

@@ -76,10 +76,10 @@ class StatLine {
       }
       log(JSON.stringify(this.fileStatInfo, null, 4))
       for (let k in allStat) {
-        log(`${k}类型文件,总计${sumStat[k]}个,共${allStat[k]}行`)
+        log(`There are ${sumStat[k]} ${k} files, ${allStat[k]} lines in total`)
       }
     } else {
-      log(chalk.red(`未统计到${this.fileType}类型文件`))
+      log(chalk.red(`${this.fileType} file not found`))
     }
   }
 }

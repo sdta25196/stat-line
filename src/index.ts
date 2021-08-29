@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
-const parse = require('yargs-parser')
-const StatLine = require('./statLine')
-const chalk = require('chalk')
-const { log } = require('./utils')
+import parse from 'yargs-parser'
+import StatLine from './statLine'
+import chalk from 'chalk'
+import { log } from './utils'
 
 const argv = parse(process.argv)
 
-const userPath = argv._[2] || './'
+const userPath: string = argv._[2] || './'
 
 if (argv.help) {
   const content = require('fs').readFileSync(require('path').resolve(__dirname, '../static/help.txt'), 'utf-8')

@@ -1,6 +1,6 @@
 # stat-line
 
-A line of code statistics tool and can assign file type
+A line of code statistics tool and can specify file type
 
 [中文文档](https://github.com/sdta25196/stat-line/blob/master/readme_CN.md)
 
@@ -13,7 +13,7 @@ A line of code statistics tool and can assign file type
 ## Usage
 
 ```js
-  line [path] [--type]
+  line [path] [Options]
 ```
 
 ## Examples

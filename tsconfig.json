@@ -1,0 +1,11 @@
+{
+	"compilerOptions": {
+		"esModuleInterop": true,
+		"downlevelIteration": true,
+		"noImplicitAny": true,
+		"outDir": "es"
+	},
+	"include": [
+		"src/**/*"
+	]
+}

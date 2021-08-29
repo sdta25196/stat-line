@@ -1,6 +1,6 @@
 # stat-line
 
-一款可指定类型的代码行数统计工具
+一款可指定文件类型的代码行数统计工具
 
 [English document](https://github.com/sdta25196/stat-line/blob/master/readme.md)
 
@@ -13,7 +13,7 @@
 ## 使用
 
 ```js
-  line path [--type]
+  line [path] [Options]
 ```
 
 ## 示例

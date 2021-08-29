@@ -1,24 +1,40 @@
 {
   "name": "stat-line",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "",
   "private": false,
   "repository": "https://github.com/sdta25196/stat-line",
   "bin": {
-    "line": "src/index.js"
+    "line": "es/index.js"
+  },
+  "scripts": {
+    "test": "jest",
+    "build": "tsc && npm publish"
   },
   "keywords": [
     "line",
     "stat",
     "statistics",
-    "stat lines"
+    "statistics lines",
+    "statistics file",
+    "specify file type",
+    "specify js line",
+    "specify file line"
   ],
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.7.5",
+    "@types/yargs-parser": "^20.2.1",
     "chalk": "^4.1.2",
     "jest": "^27.0.6",
     "progress": "^2.0.3",
+    "ts-jest": "^27.0.5",
+    "typescript": "^4.4.2",
     "yargs-parser": "^20.2.9"
+  },
+  "devDependencies": {
+    "@types/progress": "^2.0.5"
   }
 }

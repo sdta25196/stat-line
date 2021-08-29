@@ -1,14 +1,14 @@
-const path = require('path')
-const fs = require('fs')
-const ProgressBar = require('progress')
-const chalk = require('chalk')
-const { log } = require('./utils')
+import path from 'path'
+import fs from 'fs'
+import ProgressBar from 'progress'
+import chalk from 'chalk'
+import { log } from './utils'
 
 class StatLine {
-  fileType
-  workPath
-  fileStat = { }
-  constructor(userPath, fileType = '.js') {
+  fileType: string
+  workPath: string
+  fileStat: Record<string, number> = { }
+  constructor(userPath: string, fileType: string = '.js') {
     if (!fileType.startsWith(".")) {
       fileType = `.${fileType}`
     }
@@ -16,42 +16,42 @@ class StatLine {
     this.workPath = path.resolve(process.cwd(), userPath)
   }
 
-  run() {
-    if (fs.lstatSync(this.workPath).isDirectory()) {
-      this.statLines(this.workPath)
-    } else {
-      this.updateFileStat(this.workPath)
-    }
+  run(): void {
+    this.branchCondition(this.workPath)
     this.complete()
   }
 
-  statLines(workPath) {
+  statLines(workPath: string): void {
     const files = fs.readdirSync(workPath)
     const bar = new ProgressBar(`:bar :current / :total`, { total: files.length, clear: true });
     files.forEach(file => {
       const filePath = path.resolve(`${workPath}/${file}`)
-      if (fs.lstatSync(filePath).isDirectory()) {
-        this.statLines(filePath)
-      } else {
-        this.updateFileStat(filePath)
-      }
+      this.branchCondition(filePath)
       bar.tick();
     })
   }
 
-  updateFileStat(filePath) {
+  branchCondition(filePath: string) {
+    if (fs.lstatSync(filePath).isDirectory()) {
+      this.statLines(filePath)
+    } else {
+      this.updateFileStat(filePath)
+    }
+  }
+
+  updateFileStat(filePath: string): void {
     if (path.extname(filePath) === this.fileType) {
       let content = fs.readFileSync(filePath, 'utf8')
       this.fileStat[filePath] = content.split('\n').length
     }
   }
 
-  complete() {
+  complete(): void {
     const keys = Object.keys(this.fileStat)
     if (keys.length) {
       let sum = 0
       keys.forEach(e => sum += this.fileStat[e])
-      log(this.fileStat)
+      log(JSON.stringify(this.fileStat, null, 4))
       log(`总计${keys.length}个文件,${sum}行`)
     } else {
       log(chalk.red(`未统计到${this.fileType}类型文件`))
@@ -59,4 +59,4 @@ class StatLine {
   }
 }
 
-module.exports = StatLine
+export default StatLine

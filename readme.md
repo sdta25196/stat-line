@@ -74,5 +74,4 @@ A line of code statistics tool and can specify file type
   
 ## todoList：
 
-- [ ] Whether recursive folders are required 
 - [ ] Specify folders that do not need statistics

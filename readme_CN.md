@@ -1,7 +1,5 @@
 # stat-line
 
-一款可指定文件类型的代码行数统计工具
-
 <h1 align="center">
 	<br>
 	<img width="320" src="./static/logo.png" alt="stat-line">
@@ -10,6 +8,8 @@
 </h1>
 
 [![Coverage Status](https://s3.amazonaws.com/assets.coveralls.io/badges/coveralls_100.svg)](https://coveralls.io/github/chalk/chalk?branch=main)
+
+> 一款可指定文件类型的代码行数统计工具
 
 [English document](https://github.com/sdta25196/stat-line/blob/master/readme.md)
 
@@ -31,9 +31,9 @@
 
 ## options
   
-  * -r 向下开启递归文件夹，默认不进行递归
-  * -t 指定要统计的文件类型
-  * -h 显示帮助信息
+  * `-r`   向下开启递归文件夹，默认不进行递归
+  * `-t`   指定要统计的文件类型
+  * `-h`   显示帮助信息
   
 ## 示例
 

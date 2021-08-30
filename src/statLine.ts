@@ -3,28 +3,26 @@ import fs from 'fs'
 import ProgressBar from 'progress'
 import chalk from 'chalk'
 import { log } from './utils'
+import { CommandType } from './command'
 
 class StatLine {
   fileType: string[]
   workPath: string
+  recursion: boolean
   fileStatInfo: Record<string, number> = { }
-  constructor(userPath: string, fileType: string[]) {
-    this.fileType = this.addDot(fileType)
-    this.workPath = path.resolve(process.cwd(), userPath)
+  constructor(cmd: CommandType) {
+    this.fileType = cmd.type
+    this.recursion = cmd.recursion
+    this.workPath = path.resolve(process.cwd(), cmd.path)
   }
 
   run(): void {
-    this.branchCondition(this.workPath)
-    this.complete()
-  }
-
-  addDot(fileType: string[]): string[] {
-    fileType.forEach((item, i, arr) => {
-      if (!item.startsWith(".")) {
-        arr[i] = `.${item}`
-      }
-    })
-    return fileType
+    try {
+      this.branchCondition(this.workPath, true)
+      this.complete()
+    } catch (error) {
+      log(chalk.red(error.message))
+    }
   }
 
   statLines(workPath: string): void {
@@ -32,14 +30,18 @@ class StatLine {
     const bar = new ProgressBar(`:bar :current / :total`, { total: files.length, clear: true });
     files.forEach(file => {
       const filePath = path.resolve(`${workPath}/${file}`)
-      this.branchCondition(filePath)
+      this.branchCondition(filePath, this.recursion)
       bar.tick();
     })
   }
 
-  /** 分支条件处理 */
-  branchCondition(filePath: string) {
-    if (fs.lstatSync(filePath).isDirectory()) {
+  /** 
+   * 分支条件处理
+   * filePath  filePath
+   * recursion if filePath is directory，recursion next level
+  */
+  branchCondition(filePath: string, recursion: boolean) {
+    if (fs.lstatSync(filePath).isDirectory() && recursion) {
       this.statLines(filePath)
     } else {
       this.updateFileStatInfo(filePath)
@@ -74,9 +76,12 @@ class StatLine {
           }
         })
       }
-      log(JSON.stringify(this.fileStatInfo, null, 4))
+
+      for (let p in this.fileStatInfo) {
+        log(`${chalk.green(p)}: ${chalk.bold.yellow(this.fileStatInfo[p])}`)
+      }
       for (let k in allStat) {
-        log(`There are ${sumStat[k]} ${k} files, ${allStat[k]} lines in total`)
+        log(`\nThere are ${chalk.bold.green(sumStat[k])} ${k} files, ${chalk.bold.green(allStat[k])} lines in total`)
       }
     } else {
       log(chalk.red(`${this.fileType} file not found`))

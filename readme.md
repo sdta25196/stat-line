@@ -13,14 +13,30 @@ A line of code statistics tool and can specify file type
 ## Usage
 
 ```js
-  line [path] [Options]
+  line [path] [options]
 ```
+
+## path
+  
+  If you want to use [path]. You need to use relative path.
+  default [path] is [./]
+
+## options
+  
+  * -r  Open recursion folders, no recursion by default
+  * -t  Specify the type of file to be counted
+  * -h  Display help information
 
 ## Examples
 
 * All `JS` files in the current path are counted by default
 ```js
   line   
+```
+
+* If you need recursion all folder, please use `-r`
+```js
+  line -r
 ```
   
 * count current path `scss` file lines

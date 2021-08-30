@@ -2,6 +2,15 @@
 
 A line of code statistics tool and can specify file type
 
+<h1 align="center">
+	<br>
+	<img width="320" src="./static/logo.png" alt="stat-line">
+	<br>
+	<br>
+</h1>
+
+[![Coverage Status](https://s3.amazonaws.com/assets.coveralls.io/badges/coveralls_100.svg)](https://coveralls.io/github/chalk/chalk?branch=main)
+
 [中文文档](https://github.com/sdta25196/stat-line/blob/master/readme_CN.md)
 
 ## Installation

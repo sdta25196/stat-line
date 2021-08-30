@@ -2,6 +2,15 @@
 
 一款可指定文件类型的代码行数统计工具
 
+<h1 align="center">
+	<br>
+	<img width="320" src="./static/logo.png" alt="stat-line">
+	<br>
+	<br>
+</h1>
+
+[![Coverage Status](https://s3.amazonaws.com/assets.coveralls.io/badges/coveralls_100.svg)](https://coveralls.io/github/chalk/chalk?branch=main)
+
 [English document](https://github.com/sdta25196/stat-line/blob/master/readme.md)
 
 ## 安装

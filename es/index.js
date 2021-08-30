@@ -5,10 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 exports.__esModule = true;
 var yargs_parser_1 = __importDefault(require("yargs-parser"));
-var statLine_1 = __importDefault(require("./statLine"));
-var chalk_1 = __importDefault(require("chalk"));
-var utils_1 = require("./utils");
-var argv = yargs_parser_1["default"](process.argv, {
+var command_1 = __importDefault(require("./command"));
+var argv = (0, yargs_parser_1["default"])(process.argv, {
     alias: { 'type': ['t'], 'help': ['h'] },
     "default": { 'type': '.js' },
     array: ['type'],
@@ -16,17 +14,11 @@ var argv = yargs_parser_1["default"](process.argv, {
         'greedy-arrays': true
     }
 });
-var userPath = argv._[2] || './';
-if (argv.help) {
-    var content = require('fs').readFileSync(require('path').resolve(__dirname, '../static/help.txt'), 'utf-8');
-    utils_1.log(content);
-}
-else {
-    var sl = new statLine_1["default"](userPath, argv.type);
-    try {
-        sl.run();
-    }
-    catch (error) {
-        utils_1.log(chalk_1["default"].red(error.message));
-    }
-}
+var commandObj = {
+    path: argv._[2] || './',
+    type: argv.type,
+    help: argv.help || false,
+    recursion: argv.r || false
+};
+var cmd = new command_1["default"](commandObj);
+cmd.start();

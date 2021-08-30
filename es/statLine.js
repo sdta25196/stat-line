@@ -9,22 +9,20 @@ var progress_1 = __importDefault(require("progress"));
 var chalk_1 = __importDefault(require("chalk"));
 var utils_1 = require("./utils");
 var StatLine = /** @class */ (function () {
-    function StatLine(userPath, fileType) {
+    function StatLine(cmd) {
         this.fileStatInfo = {};
-        this.fileType = this.addDot(fileType);
-        this.workPath = path_1["default"].resolve(process.cwd(), userPath);
+        this.fileType = cmd.type;
+        this.recursion = cmd.recursion;
+        this.workPath = path_1["default"].resolve(process.cwd(), cmd.path);
     }
     StatLine.prototype.run = function () {
-        this.branchCondition(this.workPath);
-        this.complete();
-    };
-    StatLine.prototype.addDot = function (fileType) {
-        fileType.forEach(function (item, i, arr) {
-            if (!item.startsWith(".")) {
-                arr[i] = "." + item;
-            }
-        });
-        return fileType;
+        try {
+            this.branchCondition(this.workPath, true);
+            this.complete();
+        }
+        catch (error) {
+            (0, utils_1.log)(chalk_1["default"].red(error.message));
+        }
     };
     StatLine.prototype.statLines = function (workPath) {
         var _this = this;
@@ -32,13 +30,17 @@ var StatLine = /** @class */ (function () {
         var bar = new progress_1["default"](":bar :current / :total", { total: files.length, clear: true });
         files.forEach(function (file) {
             var filePath = path_1["default"].resolve(workPath + "/" + file);
-            _this.branchCondition(filePath);
+            _this.branchCondition(filePath, _this.recursion);
             bar.tick();
         });
     };
-    /** 分支条件处理 */
-    StatLine.prototype.branchCondition = function (filePath) {
-        if (fs_1["default"].lstatSync(filePath).isDirectory()) {
+    /**
+     * 分支条件处理
+     * filePath  filePath
+     * recursion if filePath is directory，recursion next level
+    */
+    StatLine.prototype.branchCondition = function (filePath, recursion) {
+        if (fs_1["default"].lstatSync(filePath).isDirectory() && recursion) {
             this.statLines(filePath);
         }
         else {
@@ -78,13 +80,15 @@ var StatLine = /** @class */ (function () {
             for (var k in this.fileStatInfo) {
                 _loop_1(k);
             }
-            utils_1.log(JSON.stringify(this.fileStatInfo, null, 4));
+            for (var p in this.fileStatInfo) {
+                (0, utils_1.log)(chalk_1["default"].green(p) + ": " + chalk_1["default"].bold.yellow(this.fileStatInfo[p]));
+            }
             for (var k in allStat_1) {
-                utils_1.log("There are " + sumStat_1[k] + " " + k + " files, " + allStat_1[k] + " lines in total");
+                (0, utils_1.log)("\nThere are " + chalk_1["default"].bold.green(sumStat_1[k]) + " " + k + " files, " + chalk_1["default"].bold.green(allStat_1[k]) + " lines in total");
             }
         }
         else {
-            utils_1.log(chalk_1["default"].red(this.fileType + " file not found"));
+            (0, utils_1.log)(chalk_1["default"].red(this.fileType + " file not found"));
         }
     };
     return StatLine;

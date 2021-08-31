@@ -73,6 +73,6 @@
   line -h
 ```
   
-## todoList：
+## todoList
 
 - [ ] Specify folders that do not need statistics

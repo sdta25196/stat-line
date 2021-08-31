@@ -1,12 +1,12 @@
 
 
-Usage: line [path] [Options]
+Usage: line [path] [options]
 
-path                If you want to use [path]. You need to use relative path.
+path:               If you want to use [path]. You need to use relative path.
                     default [path] is [./] 
                     e.g line ./src
 
-Options:
+options:
 
   -t, --type        Specify the type of file to be counted.
                     e.g  line --type scss

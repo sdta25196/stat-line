@@ -32,7 +32,7 @@
   default [path] is [./]
 
 ## options
-  
+
   * `-r` &nbsp;&nbsp;&nbsp;&nbsp; Open recursion folders, no recursion by default
   * `-t` &nbsp;&nbsp;&nbsp;&nbsp; Specify the type of file to be counted
   * `-h` &nbsp;&nbsp;&nbsp;&nbsp; Display help information

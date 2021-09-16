@@ -35,6 +35,7 @@
   
   * `-r` &nbsp;&nbsp;&nbsp;&nbsp; Open recursion folders, no recursion by default
   * `-t` &nbsp;&nbsp;&nbsp;&nbsp; Specify the type of file to be counted
+  * `-e` &nbsp;&nbsp;&nbsp;&nbsp; specify exclude folder
   * `-h` &nbsp;&nbsp;&nbsp;&nbsp; Display help information
 
 ## Examples
@@ -72,7 +73,13 @@
 ```js
   line -h
 ```
-  
+## More features
+
+  Please refer to the help documentation. `line -h`
+
 ## todoList
 
-- [ ] Specify folders that do not need statistics
+- [x] Specify folders that do not need statistics
+- [x] can recursion
+- [x] can specify file type
+- [x] help documentation

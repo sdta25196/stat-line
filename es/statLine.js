@@ -13,6 +13,7 @@ var StatLine = /** @class */ (function () {
         this.fileStatInfo = {};
         this.fileType = cmd.type;
         this.recursion = cmd.recursion;
+        this.exclude = cmd.exclude;
         this.workPath = path_1["default"].resolve(process.cwd(), cmd.path);
     }
     StatLine.prototype.run = function () {
@@ -21,7 +22,7 @@ var StatLine = /** @class */ (function () {
             this.complete();
         }
         catch (error) {
-            (0, utils_1.log)(chalk_1["default"].red(error.message));
+            utils_1.log(chalk_1["default"].red(error.message));
         }
     };
     StatLine.prototype.statLines = function (workPath) {
@@ -40,7 +41,9 @@ var StatLine = /** @class */ (function () {
      * recursion if filePath is directory，recursion next level
     */
     StatLine.prototype.branchCondition = function (filePath, recursion) {
-        if (fs_1["default"].lstatSync(filePath).isDirectory() && recursion) {
+        // 获取当前文件夹是否是用户排除的文件夹
+        var isExclude = this.exclude.find(function (dirName) { return dirName === path_1["default"].basename(filePath); });
+        if (fs_1["default"].lstatSync(filePath).isDirectory() && recursion && !isExclude) {
             this.statLines(filePath);
         }
         else {
@@ -81,14 +84,14 @@ var StatLine = /** @class */ (function () {
                 _loop_1(k);
             }
             for (var p in this.fileStatInfo) {
-                (0, utils_1.log)(chalk_1["default"].green(p) + ": " + chalk_1["default"].bold.yellow(this.fileStatInfo[p]));
+                utils_1.log(chalk_1["default"].green(p) + ": " + chalk_1["default"].bold.yellow(this.fileStatInfo[p]));
             }
             for (var k in allStat_1) {
-                (0, utils_1.log)("\nThere are " + chalk_1["default"].bold.green(sumStat_1[k]) + " " + k + " files, " + chalk_1["default"].bold.green(allStat_1[k]) + " lines in total");
+                utils_1.log("\nThere are " + chalk_1["default"].bold.green(sumStat_1[k]) + " " + k + " files, " + chalk_1["default"].bold.green(allStat_1[k]) + " lines in total");
             }
         }
         else {
-            (0, utils_1.log)(chalk_1["default"].red(this.fileType + " file not found"));
+            utils_1.log(chalk_1["default"].red(this.fileType + " file not found"));
         }
     };
     return StatLine;

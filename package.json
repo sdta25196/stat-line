@@ -1,6 +1,6 @@
 {
   "name": "stat-line",
-  "version": "0.3.8",
+  "version": "0.3.10",
   "description": "A line of code statistics tool and can specify file type",
   "private": false,
   "repository": "https://github.com/sdta25196/stat-line",
@@ -8,7 +8,7 @@
     "line": "es/index.js"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "upload": "tsc && npm publish"
   },
   "keywords": [

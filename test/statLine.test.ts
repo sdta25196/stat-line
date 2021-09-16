@@ -7,7 +7,8 @@ test('测试统计', () => {
     path: __dirname,
     type: ['js'],
     help: false,
-    recursion: false
+    recursion: false,
+    exclude: []
   }
   const cmd = new Command(commandObj)
   expect(cmd.start()).toBeUndefined()
@@ -17,7 +18,8 @@ test('测试指定文件类型统计', () => {
     path: __dirname,
     type: ['css'],
     help: false,
-    recursion: false
+    recursion: false,
+    exclude: []
   }
   const cmd = new Command(commandObj)
   expect(cmd.start()).toBeUndefined()
@@ -27,7 +29,8 @@ test('测试指定文件统计', () => {
     path: __dirname + '/a.js',
     type: ['js'],
     help: false,
-    recursion: false
+    recursion: false,
+    exclude: []
   }
   const cmd = new Command(commandObj)
   expect(cmd.start()).toBeUndefined()
@@ -37,7 +40,8 @@ test('测试不存在的文件类型统计', () => {
     path: __dirname,
     type: ['dart'],
     help: false,
-    recursion: false
+    recursion: false,
+    exclude: []
   }
   const cmd = new Command(commandObj)
   expect(cmd.start()).toBeUndefined()
@@ -47,7 +51,8 @@ test('测试多文件类型统计', () => {
     path: __dirname,
     type: ['.css', 'js'],
     help: false,
-    recursion: false
+    recursion: false,
+    exclude: []
   }
   const cmd = new Command(commandObj)
   expect(cmd.start()).toBeUndefined()
@@ -57,7 +62,8 @@ test('测试help', () => {
     path: __dirname,
     type: ['js'],
     help: true,
-    recursion: false
+    recursion: false,
+    exclude: []
   }
   const cmd = new Command(commandObj)
   expect(cmd.start()).toBeUndefined()
@@ -67,7 +73,19 @@ test('测试递归', () => {
     path: __dirname,
     type: ['css', 'js'],
     help: false,
-    recursion: true
+    recursion: true,
+    exclude: []
+  }
+  const cmd = new Command(commandObj)
+  expect(cmd.start()).toBeUndefined()
+});
+test('测试排除', () => {
+  let commandObj: CommandType = {
+    path: __dirname,
+    type: ['css', 'js'],
+    help: false,
+    recursion: true,
+    exclude: ['b']
   }
   const cmd = new Command(commandObj)
   expect(cmd.start()).toBeUndefined()
@@ -77,7 +95,8 @@ test('测试出错', () => {
     path: __dirname + './error/a',
     type: ['css', 'js'],
     help: false,
-    recursion: true
+    recursion: true,
+    exclude: []
   }
   const cmd = new Command(commandObj)
   expect(cmd.start()).toBeUndefined()

@@ -18,7 +18,7 @@ var Command = /** @class */ (function () {
     Command.prototype.start = function () {
         if (this.cmd.help) {
             var content = fs_1["default"].readFileSync(path_1["default"].resolve(__dirname, '../static/help.txt'), 'utf-8');
-            (0, utils_1.log)(content);
+            utils_1.log(content);
             return;
         }
         var sl = new statLine_1["default"](this.cmd);

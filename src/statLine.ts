@@ -9,10 +9,12 @@ class StatLine {
   fileType: string[]
   workPath: string
   recursion: boolean
-  fileStatInfo: Record<string, number> = { }
+  exclude: string[]
+  fileStatInfo: Record<string, number> = {}
   constructor(cmd: CommandType) {
     this.fileType = cmd.type
     this.recursion = cmd.recursion
+    this.exclude = cmd.exclude
     this.workPath = path.resolve(process.cwd(), cmd.path)
   }
 
@@ -41,7 +43,10 @@ class StatLine {
    * recursion if filePath is directory，recursion next level
   */
   branchCondition(filePath: string, recursion: boolean) {
-    if (fs.lstatSync(filePath).isDirectory() && recursion) {
+    // 获取当前文件夹是否是用户排除的文件夹
+    let isExclude = this.exclude.find(dirName => dirName === path.basename(filePath))
+
+    if (fs.lstatSync(filePath).isDirectory() && recursion && !isExclude) {
       this.statLines(filePath)
     } else {
       this.updateFileStatInfo(filePath)
@@ -60,8 +65,8 @@ class StatLine {
   complete(): void {
     const keys = Object.keys(this.fileStatInfo)
     if (keys.length) {
-      const allStat: Record<string, number> = { }
-      const sumStat: Record<string, number> = { }
+      const allStat: Record<string, number> = {}
+      const sumStat: Record<string, number> = {}
       for (let k in this.fileStatInfo) {
         this.fileType.forEach(item => {
           if (new RegExp(`${item}$`).test(k)) {

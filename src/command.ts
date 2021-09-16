@@ -1,14 +1,14 @@
 import StatLine from './statLine'
 import fs from 'fs'
 import path from 'path'
-import chalk from 'chalk'
 import { log } from './utils'
 
 export type CommandType = {
   path: string,
   type: string[],
   help: boolean,
-  recursion: boolean
+  recursion: boolean,
+  exclude: string[],
 }
 
 /**

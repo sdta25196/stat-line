@@ -1,9 +1,13 @@
 {
   "name": "stat-line",
-  "version": "0.3.10",
+  "version": "0.3.11",
   "description": "A line of code statistics tool and can specify file type",
   "private": false,
   "repository": "https://github.com/sdta25196/stat-line",
+  "files": [
+    "es",
+    "static"
+  ],
   "bin": {
     "line": "es/index.js"
   },

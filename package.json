@@ -1,6 +1,6 @@
 {
   "name": "stat-line",
-  "version": "0.3.13",
+  "version": "0.3.14",
   "description": "A line of code statistics tool and can specify file type",
   "private": false,
   "repository": "https://github.com/sdta25196/stat-line",
